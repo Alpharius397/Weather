@@ -18,10 +18,28 @@
         <div class="search-box">
             <i class="fa-solid fa-location-dot"></i>
             <input type="text" placeholder="Enter your location">
-            <button class="fa-solid fa-magnifying-glass"></button>
-            <br><p id="option">Other weather details:</p>
-            
+            <button class="fa-solid fa-magnifying-glass"></button><p style="color:white">_</p>
+            <button class="fa-solid fa-arrows-rotate" id="refresh"></button>
         </div>
+        <p id="re">
+          <p id="del"><br></p>
+            <div class="other-info">
+             <p>Other weather details:</p>
+            </div>
+           <p id="del"><br> </p>
+            <div class="other-info1">
+              <form>
+                <input type="checkbox" id="wind_speed" value="Wind Speed">
+                <label for="wind_speed"> Wind Speed </label>
+                <input type="checkbox" id="visi" value="Visibilty">
+                <label for="visi"> Visibilty </label>
+                <input type="checkbox" id="wind_direction" value="Wind Direction">
+                <label for="wind_direction"> Wind Direction </label>
+                <input type="checkbox" id="pre" value="Pressure">
+                <label for="pre"> Pressure </label>
+              </form>
+            </div>
+        </p>
 
         <div class="not-found">
             <img src="images/404.jpg">
@@ -34,14 +52,8 @@
             <p class="description"></p>
         </div>
 
-        <div class="weather-details">
-            <div class="wind_dir">
-                <i class="fa-solid fa-water"></i>
-                <div class="text">
-                    <span></span>
-                    <p>Wind Direction</p>
-                </div>
-            </div>
+        <div class="weather-details1">
+            
             <div class="wind">
                 <i class="fa-solid fa-wind"></i>
                 <div class="text">
@@ -49,12 +61,35 @@
                     <p>Wind Speed</p>
                 </div>
             </div>
-            
+
+            <div class="vis">
+                <i class="fa-solid fa-eye"></i>
+                <div class="text">
+                    <span></span>
+                    <p>Visibilty</p>
+                </div>
+            </div>
         </div>
 
-    </div>
+            <div class="weather-details2">
+             <div class="wind_dir">
+                <i class="fa-brands fa-nfc-directional"></i>
+                <div class="text">
+                    <span></span>
+                    <p>Wind Direction</p>
+                </div>
+             </div>
+                <div class="Pres">
+                <i class="fa-solid fa-gauge"></i>
+                  <div class="text">
+                    <span></span>
+                    <p>Pressure</p>
+                 </div>
+                </div></div>
 
-    <script src="https://kit.fontawesome.com/7c8801c017.js" crossorigin="anonymous"></script>
+             </div>
+
+    <script src="https://kit.fontawesome.com/9709fae26f.js" crossorigin="anonymous"></script>
     <script src="index.js"></script>
 </body>
 
