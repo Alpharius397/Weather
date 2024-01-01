@@ -6,7 +6,11 @@ const weatherDetails2 = document.querySelector('.weather-details2');
 const error404 = document.querySelector('.not-found');
 const re = document.getElementById('re');
 const refresh = document.getElementById('refresh');
-var other;
+const left = document.getElementById('left');
+const right = document.getElementById('right');
+var other,k;
+var flag = true,lat,lon,prev,next;
+var day = 0; /** Data is segmented for each day in 3 hours segment(0,3,6,9,12,15,18,21). Max valuable day =  */
 
 
 function C_F(celsius) {
@@ -33,7 +37,357 @@ function pass(div_class,count){
     }
 }
 
+function date(da){
+    var dd = da.slice(8,10);
+    var mm = da.slice(5,7);
+    var yyyy = da.slice(0,4);
+
+    return dd+"/"+mm+"/"+yyyy;
+}
+
+function Day(da){
+    var k = da.slice(0,2);
+     return parseInt(k);
+}
+
+left.addEventListener('click', () => {
+    const APIKey = '38a2892af44caef061d6b52965585b1c';
+    const city = document.querySelector('.search-box input').value.toUpperCase();
+    const wispbox = document.getElementById('wind_speed').checked;
+    const visibox = document.getElementById('visi').checked;
+    const widibox= document.getElementById('wind_direction').checked;
+    const preboxx = document.getElementById('pre').checked;
+
+        fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${APIKey}`)
+        .then(response => response.json())
+        .then(json => {
+            if(json.cod === '404'){
+          
+            }
+
+            lat = json[0].lat;
+            lon = json[0].lon;
+
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIKey}&units=metric`)
+        .then(response => response.json())
+        .then(json => {
+     
+    
+            if (json.cod === '404') {
+                container.style.height = '400px';
+                weatherBox.style.display = 'none';
+                weatherDetails1.style.display = 'none';
+                weatherDetails2.style.display = 'none';
+                error404.style.display = 'block';
+                error404.classList.add('fadeIn');
+                other = document.getElementById('del');
+                other.style.display = 'none';
+                other = document.getElementById('del');
+                other.style.display = 'none';
+                other = document.querySelector('.other-info');
+                other.style.display = 'none';
+                other = document.querySelector('.other-info1');
+                other.style.display = 'none';
+                return;
+            }
+
+            if(day>0){    
+                right.disabled = false;
+                right.style.color = 'grey';
+                prev = Day(date(json.list[day].dt_txt));
+                next = Day(date(json.list[day].dt_txt));
+                
+                k=0;
+                while(prev==next && day>0){
+                    prev = Day(date(json.list[day].dt_txt));
+                    next = Day(date(json.list[day-1].dt_txt));
+                    day=day-1;
+                }
+
+                k = day;
+                prev = Day(date(json.list[k].dt_txt));
+                next = Day(date(json.list[k-1].dt_txt));
+
+                while(prev==next && k>0){
+                    prev = Day(date(json.list[k].dt_txt));
+                    next = Day(date(json.list[k-1].dt_txt));
+                    k=k-1;
+                }
+
+                if(k==0){
+                    day = k;
+                }
+
+                if(day==0){
+                    left.disabled = true;
+                    left.style.color = 'white';
+                }
+ 
+  
+
+            error404.style.display = 'none';
+            error404.classList.remove('fadeIn');
+
+            const image = document.querySelector('.weather-box img');
+            const temperature = document.querySelector('.weather-box .temperature');
+            const description = document.querySelector('.weather-box .description');
+            const wind_direction = document.getElementById("3");
+            const wind = document.getElementById("1");
+            const visi = document.getElementById("2");
+            const pres = document.getElementById("4");
+  
+
+            temperature.innerHTML = `${parseInt(json.list[day].main.temp)}<span>°C</span> <h9 style="color:white">_</h9>/ ${C_F(parseInt(json.list[day].main.temp))}<span>°F</span>`;
+            description.innerHTML = `${json.list[day].weather[0].description}`;
+            ddmmyy.innerHTML = `${date(json.list[day].dt_txt)}`;
+
+        try{
+            if(widibox){
+                wind_direction.innerHTML = `${json.list[day].wind.deg}°`;
+            }
+            else{
+                wind_direction.innerHTML = `-`;
+            }
+        }
+
+        catch(TypeError){
+
+        }
+
+        try{
+            if(wispbox){
+                wind.innerHTML = `${parseInt(json.list[day].wind.speed)} Km/h`;
+            }
+            else{
+                wind.innerHTML = `-`;
+            }
+        }
+
+        catch(TypeError){
+
+        }
+
+        try{
+            if(visibox){
+                visi.innerHTML = `${parseInt(json.list[day].visibility)} Km`;
+            }
+            else{
+                visi.innerHTML = `-`;
+            }
+        }
+        catch(TypeError){
+
+        }
+
+        try{
+            if(preboxx){
+                pres.innerHTML = `${parseInt(json.list[day].main.pressure)} hPa`;
+            }
+            else{
+                pres.innerHTML = `-`;
+            }
+        }
+
+        catch(TypeError){
+
+        }
+
+
+            weatherBox.style.display = '';
+            other = document.getElementById('del');
+            other.style.display = 'none';
+            other = document.getElementById('del');
+            other.style.display = 'none';
+            other = document.querySelector('.other-info');
+            other.style.display = 'none';
+            other = document.querySelector('.other-info1');
+            other.style.display = 'none';
+            weatherBox.classList.add('fadeIn');
+
+        }; });
+
+
+});
+});
+
+right.addEventListener('click', () => {
+        const APIKey = '38a2892af44caef061d6b52965585b1c';
+        const city = document.querySelector('.search-box input').value.toUpperCase();
+        const wispbox = document.getElementById('wind_speed').checked;
+        const visibox = document.getElementById('visi').checked;
+        const widibox= document.getElementById('wind_direction').checked;
+        const preboxx = document.getElementById('pre').checked;
+        
+    
+            fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${APIKey}`)
+            .then(response => response.json())
+            .then(json => {
+                if(json.cod === '404'){
+               
+                }
+    
+                lat = json[0].lat;
+                lon = json[0].lon;
+    
+        fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIKey}&units=metric`)
+            .then(response => response.json())
+            .then(json => {
+         
+                
+                if (json.cod === '404') {
+                    container.style.height = '400px';
+                    weatherBox.style.display = 'none';
+                    weatherDetails1.style.display = 'none';
+                    weatherDetails2.style.display = 'none';
+                    error404.style.display = 'block';
+                    error404.classList.add('fadeIn');
+                    other = document.getElementById('del');
+                    other.style.display = 'none';
+                    other = document.getElementById('del');
+                    other.style.display = 'none';
+                    other = document.querySelector('.other-info');
+                    other.style.display = 'none';
+                    other = document.querySelector('.other-info1');
+                    other.style.display = 'none';
+                    return;
+                }
+
+            if(day<39){    
+                left.disabled = false;
+                left.style.color = 'grey';
+                prev = Day(date(json.list[day].dt_txt));
+                next = Day(date(json.list[day].dt_txt));
+           
+                while(prev==next && day<39){
+                    prev = Day(date(json.list[day].dt_txt));
+                    next = Day(date(json.list[day+1].dt_txt));
+                    day+=1;
+                }
+            }
+            k = day;
+            prev = Day(date(json.list[k].dt_txt));
+            next = Day(date(json.list[k+1].dt_txt));
+
+            while(prev==next && k<39){
+                prev = Day(date(json.list[k].dt_txt));
+                next = Day(date(json.list[k+1].dt_txt));
+                k=k+1;
+            }
+
+            if(k==39){
+                day = k;
+            }
+
+            if(day==39){
+                right.disabled = true;
+                right.style.color = 'white';
+            }
+
+            
+            
+     
+    
+
+                
+
+                error404.style.display = 'none';
+                error404.classList.remove('fadeIn');
+    
+                const image = document.querySelector('.weather-box img');
+                const temperature = document.querySelector('.weather-box .temperature');
+                const description = document.querySelector('.weather-box .description');
+                const wind_direction = document.getElementById("3");
+                const wind = document.getElementById("1");
+                const visi = document.getElementById("2");
+                const pres = document.getElementById("4");
+      
+    
+                temperature.innerHTML = `${parseInt(json.list[day].main.temp)}<span>°C</span> <h9 style="color:white">_</h9>/ ${C_F(parseInt(json.list[day].main.temp))}<span>°F</span>`;
+                description.innerHTML = `${json.list[day].weather[0].description}`;
+                ddmmyy.innerHTML = `${date(json.list[day].dt_txt)}`;
+    
+            try{
+                if(widibox){
+                    wind_direction.innerHTML = `${json.list[day].wind.deg}°`;
+                }
+                else{
+                    wind_direction.innerHTML = `-`;
+                }
+            }
+    
+            catch(TypeError){
+    
+            }
+    
+            try{
+                if(wispbox){
+                    wind.innerHTML = `${parseInt(json.list[day].wind.speed)} Km/h`;
+                }
+                else{
+                    wind.innerHTML = `-`;
+                }
+            }
+    
+            catch(TypeError){
+    
+            }
+    
+            try{
+                if(visibox){
+                    visi.innerHTML = `${parseInt(json.list[day].visibility)} Km`;
+                }
+                else{
+                    visi.innerHTML = `-`;
+                }
+            }
+            catch(TypeError){
+    
+            }
+    
+            try{
+                if(preboxx){
+                    pres.innerHTML = `${parseInt(json.list[day].main.pressure)} hPa`;
+                }
+                else{
+                    pres.innerHTML = `-`;
+                }
+            }
+    
+            catch(TypeError){
+    
+            }
+    
+    
+                weatherBox.style.display = '';
+                other = document.getElementById('del');
+                other.style.display = 'none';
+                other = document.getElementById('del');
+                other.style.display = 'none';
+                other = document.querySelector('.other-info');
+                other.style.display = 'none';
+                other = document.querySelector('.other-info1');
+                other.style.display = 'none';
+                weatherBox.classList.add('fadeIn');
+    
+
+    
+    
+            }); });
+        
+    
+    });
+
+
+
 refresh.addEventListener('click', () => {
+
+    day = 0;
+        left.style.color = 'grey';
+        left.disabled = false;
+
+        right.style.color = 'grey';
+        right.disabled = false;
+
     if(!(re)){
         re.innerHTML = `<p id="del"><br></p>
         <div class="other-info">
@@ -74,6 +428,16 @@ refresh.addEventListener('click', () => {
   }); 
 
 search.addEventListener('click', () => {
+
+    if(day==0){
+        left.style.color = 'white';
+        left.disabled = true;
+    }
+
+    if(day==39){
+        right.style.color = 'white';
+        right.disabled = true;
+    }
     
     const APIKey = '38a2892af44caef061d6b52965585b1c';
     const city = document.querySelector('.search-box input').value.toUpperCase();
@@ -83,6 +447,7 @@ search.addEventListener('click', () => {
     const preboxx = document.getElementById('pre').checked;
     var del = document.querySelector('.other-info');
     var dele = document.getElementById('del');
+    var ddmmyy = document.getElementById('ddmmyy');
     var count = 0;
     var div_create
     var Cnt = detCnt(visibox) + detCnt(widibox) + detCnt(wispbox) + detCnt(preboxx);
@@ -140,10 +505,21 @@ search.addEventListener('click', () => {
     if (city === '')
         return;
 
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${APIKey}`)
+        fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${APIKey}`)
+        .then(response => response.json())
+        .then(json => {
+            if(json.cod === '404'){
+                flag = true;
+            }
+
+            lat = json[0].lat;
+            lon = json[0].lon;
+
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIKey}&units=metric`)
         .then(response => response.json())
         .then(json => {
 
+            
             if (json.cod === '404') {
                 container.style.height = '400px';
                 weatherBox.style.display = 'none';
@@ -151,6 +527,14 @@ search.addEventListener('click', () => {
                 weatherDetails2.style.display = 'none';
                 error404.style.display = 'block';
                 error404.classList.add('fadeIn');
+                other = document.getElementById('del');
+                other.style.display = 'none';
+                other = document.getElementById('del');
+                other.style.display = 'none';
+                other = document.querySelector('.other-info');
+                other.style.display = 'none';
+                other = document.querySelector('.other-info1');
+                other.style.display = 'none';
                 return;
             }
 
@@ -166,12 +550,13 @@ search.addEventListener('click', () => {
             const pres = document.getElementById("4");
   
 
-            temperature.innerHTML = `${parseInt(json.main.temp)}<span>°C</span> <h9 style="color:white">_</h9>/ ${C_F(parseInt(json.main.temp))}<span>°F</span>`;
-            description.innerHTML = `${json.weather[0].description}`;
+            temperature.innerHTML = `${parseInt(json.list[day].main.temp)}<span>°C</span> <h9 style="color:white">_</h9>/ ${C_F(parseInt(json.list[day].main.temp))}<span>°F</span>`;
+            description.innerHTML = `${json.list[day].weather[0].description}`;
+            ddmmyy.innerHTML = `${date(json.list[day].dt_txt)}`;
 
         try{
             if(widibox){
-                wind_direction.innerHTML = `${json.wind.deg}°`;
+                wind_direction.innerHTML = `${json.list[day].wind.deg}°`;
             }
             else{
                 wind_direction.innerHTML = `-`;
@@ -184,7 +569,7 @@ search.addEventListener('click', () => {
 
         try{
             if(wispbox){
-                wind.innerHTML = `${parseInt(json.wind.speed)} Km/h`;
+                wind.innerHTML = `${parseInt(json.list[day].wind.speed)} Km/h`;
             }
             else{
                 wind.innerHTML = `-`;
@@ -197,7 +582,7 @@ search.addEventListener('click', () => {
 
         try{
             if(visibox){
-                visi.innerHTML = `${parseInt(json.visibility)} Km`;
+                visi.innerHTML = `${parseInt(json.list[day].visibility)} Km`;
             }
             else{
                 visi.innerHTML = `-`;
@@ -209,7 +594,7 @@ search.addEventListener('click', () => {
 
         try{
             if(preboxx){
-                pres.innerHTML = `${parseInt(json.main.pressure)} hPa`;
+                pres.innerHTML = `${parseInt(json.list[day].main.pressure)} hPa`;
             }
             else{
                 pres.innerHTML = `-`;
@@ -256,8 +641,13 @@ search.addEventListener('click', () => {
                 container.style.height = '440px';
             }
 
+            console.log(day);
 
-        });
 
-
+        }); 
+    });
 });
+
+
+
+
