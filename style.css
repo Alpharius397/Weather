@@ -52,6 +52,7 @@ body{
     font-size: 15px;
     text-align: center;
     color: #06283D;
+    margin-top: 5px;
 }
 
 .other-info1 form,label{
@@ -113,7 +114,7 @@ body{
     color: #06283D;
     font-size: 3rem;
     font-weight: 800;
-    margin-top: 30px;
+    margin-top: 5px;
     margin-left: -16px;
 }
 
@@ -144,13 +145,13 @@ body{
     margin-top: 30px;
 }
 
-.weather-details2 .wind_dir, .Pres{
+ #wind_dir, #Pres{
     display: flex;
     width: 50%;
     height: 50px;
 }
 
-.weather-details1 .wind, .vis{
+ #wind, #vis{
     display: flex;
     width: 50%;
     height: 50px;
