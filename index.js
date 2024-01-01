@@ -87,6 +87,8 @@ search.addEventListener('click', () => {
     var div_create
     var Cnt = detCnt(visibox) + detCnt(widibox) + detCnt(wispbox) + detCnt(preboxx);
     var list = [wispbox,visibox,widibox,preboxx];
+    weatherDetails1.innerHTML = ``;
+    weatherDetails2.innerHTML = ``;
 
     for(i=0;i<4;i++){
         if(list[i]==true){
