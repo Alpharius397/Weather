@@ -27,14 +27,41 @@ body{
 }
 
 .search-box{
-    width: 350px;
+    width: 100%;
     height: min-content;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 50px;
-    padding: 15px;
+    padding: 10px;
+
+}
+
+.date{
+    width: 50%;
+    height: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+    margin: auto;
+}
+
+.date p{
+    padding: 5px;
+}
+
+.date button,button{
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    color:grey;
+    background: none;
+    transition: 0.4s ease;
+}
+.date button:hover,button:hover{
+    background: none;
+    color:grey;
 }
 
 .other-info{
@@ -106,10 +133,14 @@ body{
 
 .weather-box{
     text-align: center;
+    align-items: center;
+    align-self: center;
+    display: block;
 
 }
 
 .weather-box .temperature{
+    width: 100%;
     position: relative;
     color: #06283D;
     font-size: 3rem;
@@ -126,6 +157,7 @@ body{
 
 .weather-box .description{
     color: #06283D;
+    width: 100%;
     font-size: 22px;
     font-weight: 500;
     text-transform: capitalize;
@@ -149,12 +181,14 @@ body{
     display: flex;
     width: 50%;
     height: 50px;
+    margin-left: 20px;
 }
 
  #wind, #vis{
     display: flex;
     width: 50%;
     height: 50px;
+    margin-left: 20px;
 }
 
 
