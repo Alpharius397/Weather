@@ -31,8 +31,8 @@
               <form>
                 <input type="checkbox" id="wind_speed" value="Wind Speed">
                 <label for="wind_speed"> Wind Speed </label>
-                <input type="checkbox" id="visi" value="Visibilty">
-                <label for="visi"> Visibilty </label>
+                <input type="checkbox" id="humi" value="humidity">
+                <label for="humi"> Humidity </label>
                 <input type="checkbox" id="wind_direction" value="Wind Direction">
                 <label for="wind_direction"> Wind Direction </label>
                 <input type="checkbox" id="pre" value="Pressure">
@@ -63,9 +63,29 @@
             <div class="weather-details2">
              </div>
 
+             <div class="graph">
+                <button id = "vis_data">Visualize Data</button>
+             </div>
+
     </div>
 
+    <div class="canvas">
+        <div class="choice">
+            <button class="fa-solid fa-x" id="exit"></button>
+        </div>
+        <div class="date">
+            <button class="fa-solid fa-arrow-left" id="left-graph"></button>
+            <p id="choice"></p>
+            <button class="fa-solid fa-arrow-right" id="right-graph"></button>
+        </div>
+        <div class = 'chart_div'>
+        <canvas id = "chart" style="width:100%;max-width: 900px;max-height: 350px;"></canvas>
+        </div>
+</div>
+
     <script src="https://kit.fontawesome.com/9709fae26f.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.4/math.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src="index.js"></script>
 </body>
 
