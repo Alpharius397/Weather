@@ -43,7 +43,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: 10px;
+    padding-top: 5px;
     margin: auto;
 }
 
@@ -184,7 +184,7 @@ body{
     margin-left: 20px;
 }
 
- #wind, #vis{
+ #wind, #hum{
     display: flex;
     width: 50%;
     height: 50px;
@@ -229,6 +229,7 @@ body{
     color: #06283D;
     font-size: 14px;
     font-weight: 500;
+    margin-bottom: 10px;
 }
 
 .not-found{
@@ -256,10 +257,89 @@ body{
     opacity: 0;
 }
 
+.graph{
+    width: 100%;
+    height: 40px;
+    margin: auto;
+    color: #06283D;
+    padding-top: 30px;
+}
+
+.graph p{
+    color: #06283D;
+    width: 80%;
+    font-size: 24px;
+    font-weight: 500;
+    padding-left: 20px;
+    color:#fff;
+}
+
+.graph button{
+    width: 100%;
+    height: 30px;
+    border-radius: 30px;
+    background-color:#04694d;
+    color:#fff;
+    border: "black";
+    
+}
+
+
+
+.graph button:hover{
+    background-color:#fff;
+    color:#04694d;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.canvas{
+    position: relative;
+    background: #fff;
+    width: 400px;
+    height: 220px;
+    padding: 28px 32px;
+    margin: auto;
+    border-radius: 18px;
+    font-family: 'Roboto', sans-serif;
+    transition: 1s ease-out;
+    display: none;
+}
+
+.canvas .date{
+    margin: auto;
+    padding: 10px;
+    margin-bottom: 40px;
+}
+
+#chart{
+    margin: auto; 
+    height: 80%;
+    margin-top: auto;
+}
+
 .fadeIn{
     animation: 0.5s fadeIn forwards;
     animation-delay: 0.5s;
 }
+
+.choice button{
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    color: #06283D;
+    background: #dff6ff;
+    border-radius: 50%;
+    font-size: 15px;
+    transition: 0.4s ease;
+    padding-top: 0px;
+    margin: 0px;
+}
+
+.choice button:hover{
+    color: #fff;
+    background: #06283D;
+}
+
 
 @keyframes fadeIn{
     to {
