@@ -79,7 +79,7 @@ body{
     font-size: 15px;
     text-align: center;
     color: #06283D;
-    margin-top: 5px;
+    margin-top: 25px;
 }
 
 .other-info1 form,label{
@@ -92,7 +92,6 @@ body{
     text-align: center;
     margin-left: 2px;
 }
-
 
 .search-box input{
     color: #06283D;
@@ -136,6 +135,7 @@ body{
     align-items: center;
     align-self: center;
     display: block;
+    margin-top: 20px;
 
 }
 
@@ -190,8 +190,6 @@ body{
     height: 50px;
     margin-left: 20px;
 }
-
-
 
 .weather-details1 i{
     color: #06283D;
@@ -262,7 +260,7 @@ body{
     height: 40px;
     margin: auto;
     color: #06283D;
-    padding-top: 30px;
+    margin-top: 20px;
 }
 
 .graph p{
