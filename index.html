@@ -18,11 +18,11 @@
         <div class="search-box">
             <i class="fa-solid fa-location-dot"></i>
             <input type="text" placeholder="Enter your location">
-            <button class="fa-solid fa-magnifying-glass"></button><p style="color:white">_</p>
+            <button class="fa-solid fa-magnifying-glass"></button><p style="color:white;-webkit-user-select: none; /* Safari */
+            -ms-user-select: none;user-select: none;">_</p>
             <button class="fa-solid fa-arrows-rotate" id="refresh"></button>
         </div>
         <p id="re">
-          <p id="del"><br></p>
             <div class="other-info">
              <p>Other weather details:</p>
             </div>
@@ -49,7 +49,7 @@
         <div class="weather-box">
             <div class="date">
                 <button class="fa-solid fa-arrow-left" id="left"></button>
-                <p id="ddmmyy"></p>
+                <p id="ddmmyy" style="padding-top: 10px;"></p>
                 <button class="fa-solid fa-arrow-right" id="right"></button>
             </div>
             <img src="">
