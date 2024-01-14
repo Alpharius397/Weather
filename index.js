@@ -71,7 +71,7 @@ function XxY(e, x_mat, y_mat) {
 function C_F(celsius) {
     F = 1;
     F = (celsius * 9 / 5) + 32;
-    return F;
+    return F.toFixed(1);
 }
 
 function detCnt(check) {
@@ -136,6 +136,8 @@ function update_data(json){
             "wind_speed": parseInt(json.list[i].wind.speed),
         }
     }
+
+    console.log(data.length);
     return data;
 }
 
@@ -431,12 +433,16 @@ function error_404(container,weatherBox,weatherDetails1,weatherDetails2,error404
     other.style.display = 'none';
     other = document.getElementById('del');
     other.style.display = 'none';
+    other = document.getElementById('del');
+    other.style.display = 'none';
+    other = document.getElementById('del');
+    other.style.display = 'none';
     other = document.querySelector('.other-info');
     other.style.display = 'none';
     other = document.querySelector('.other-info1');
     other.style.display = 'none';
     visual.style.display = 'none';
-    error404.style.display = '';
+    error404.style.display = 'block';
     error404.classList.add('fadeIn');
 }
 
@@ -453,7 +459,7 @@ left.addEventListener('click', () => {
         .then(json => {
 
             if (json.cod === '404') {
-                error_404(list);
+                error_404(container,weatherBox,weatherDetails1,weatherDetails2,error404);
                 return;
             }
 
